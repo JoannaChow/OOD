@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var FileSearch_1 = require("./FileSearch");
+var params = new FileSearch_1.SearchParams();
+params.extension = "xml";
+params.minSize = 2;
+params.maxSize = 100;
+var xmlFile = new FileSearch_1.FileEntry();
+xmlFile.setContent(new Blob(["<test>abcabc<test/>"]));
+xmlFile.setName("aaa.xml");
+var textFile = new FileSearch_1.FileEntry();
+textFile.setContent(new Blob(["this is text"]));
+textFile.setName("bbb.txt");
+var jsonFile = new FileSearch_1.FileEntry();
+jsonFile.setContent(new Blob(["{a:'line one'}"]));
+jsonFile.setName("ccc.json");
+var dir1 = new FileSearch_1.FolderEntry();
+dir1.addEntry(textFile);
+dir1.addEntry(xmlFile);
+var dir0 = new FileSearch_1.FolderEntry();
+dir0.addEntry(jsonFile);
+dir0.addEntry(dir1);
+var searcher = new FileSearch_1.FileSearch();
+console.log(searcher.search(dir0, params));
+//# sourceMappingURL=test.js.map
